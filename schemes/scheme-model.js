@@ -19,9 +19,16 @@ function findSteps(id) {
 		.orderBy('st.step_number', 'asc')
 };
 
+async function add(scheme) {
+	const [id] = await db('schemes').insert(scheme)
+	return db('schemes')
+		.where({ id })
+		.first()
+};
 
 module.exports = {
 	find,
 	findById,
-	findSteps
+	findSteps,
+	add
 };
