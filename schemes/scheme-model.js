@@ -34,11 +34,29 @@ async function update(changes, id) {
 		return findById(id)
 };
 
+function remove(id) {
+	return db('schemes')
+		.where({ id })
+		.select()
+		.then(scheme => {
+			if (!scheme) {
+				return null
+			} else {
+				return db('schemes')
+					.where({ id })
+					.del()
+					.then(() => {
+						return scheme;
+					})
+			}
+		})
+};
 
 module.exports = {
 	find,
 	findById,
 	findSteps,
 	add,
-	update
+	update,
+	remove
 };
