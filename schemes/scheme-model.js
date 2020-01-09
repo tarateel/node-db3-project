@@ -26,9 +26,19 @@ async function add(scheme) {
 		.first()
 };
 
+async function update(changes, id) {
+	await db('schemes')
+		.where({ id })
+		.update(changes)
+	
+		return findById(id)
+};
+
+
 module.exports = {
 	find,
 	findById,
 	findSteps,
-	add
+	add,
+	update
 };
